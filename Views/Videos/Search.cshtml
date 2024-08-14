@@ -53,14 +53,14 @@
             var promptError = document.getElementById('promptError');
             
             if (promptInput.value.trim() === "") {
-                // Prevent form submission and show error message
+             
                 event.preventDefault();
                 promptError.textContent = "The search prompt is required.";
                 promptError.style.display = 'block';
                 promptInput.focus();
             } else {
-                promptError.style.display = 'none'; // Hide error message
-                showLoader(); // Show loader if validation passes
+                promptError.style.display = 'none';
+                showLoader(); 
             }
         });
     });
