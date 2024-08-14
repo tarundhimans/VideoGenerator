@@ -1,0 +1,41 @@
+﻿@model List<string>
+
+@{
+    ViewData["Title"] = "Select a Quote";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="text-center mb-4">
+                <h2 class="font-weight-bold text-dark">@ViewData["Title"]</h2>
+                <p class="text-secondary">Choose a quote below to search for related videos.</p>
+            </div>
+            @if (Model != null && Model.Any())
+            {
+                <div class="list-group">
+                    @foreach (var quote in Model)
+                    {
+                        <form asp-action="SearchVideos" method="post" class="mb-2">
+                            <input type="hidden" name="selectedQuote" value="@quote" />
+                            <div class="list-group-item list-group-item-light shadow-sm">
+                                <div class="text-dark">
+                                    @quote
+                                </div>
+                                <div class="text-right mt-2">
+                                    <button type="submit" class="btn btn-sm btn-primary">Click to Watch Videos</button>
+                                </div>
+                            </div>
+                        </form>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-warning text-center">
+                    <p>No quotes found for the given prompt.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

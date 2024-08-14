@@ -1,0 +1,131 @@
+﻿@{
+    ViewData["Title"] = "Video Search";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Ensure you have a shared layout
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="text-center">
+                <h1 class="display-4 font-weight-bold text-dark">Explore a World of Videos</h1>
+                <p class="lead text-secondary">Enter a topic or keyword to discover a variety of video content curated for you.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h4 class="text-center text-dark mb-4">Search Videos</h4>
+                    <form asp-action="SearchQuotes" method="post" id="searchForm">
+                        <div class="form-group">
+                            <label for="prompt" class="text-dark">Search Prompt:</label>
+                            <input type="text" class="form-control form-control-lg" id="prompt" name="prompt" placeholder="e.g., 'Travel', 'Technology', 'Cooking'" />
+                            <div id="promptError" class="text-danger mt-2" style="display: none;"></div>
+                        </div>
+                        <button type="submit" class="btn btn-lg btn-dark btn-block mt-4">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8 text-center">
+            <p class="text-muted">Powered by Video Search API</p>
+        </div>
+    </div>
+</div>
+
+<!-- Loader -->
+<div id="loader" class="loader" style="display: none;">
+    <div class="spinner"></div>
+</div>
+
+<!-- JavaScript -->
+<script src="~/js/site.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var form = document.getElementById('searchForm');
+        form.addEventListener('submit', function (event) {
+            var promptInput = document.getElementById('prompt');
+            var promptError = document.getElementById('promptError');
+            
+            if (promptInput.value.trim() === "") {
+                // Prevent form submission and show error message
+                event.preventDefault();
+                promptError.textContent = "The search prompt is required.";
+                promptError.style.display = 'block';
+                promptInput.focus();
+            } else {
+                promptError.style.display = 'none'; // Hide error message
+                showLoader(); // Show loader if validation passes
+            }
+        });
+    });
+
+    // Function to show loader
+    function showLoader() {
+        document.getElementById('loader').style.display = 'flex';
+    }
+</script>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        color: #212529;
+        font-family: 'Roboto', Arial, sans-serif;
+    }
+
+    .card {
+        border-radius: 10px;
+        background-color: #ffffff;
+    }
+
+    .btn-dark {
+        background-color: #343a40;
+        border-color: #343a40;
+    }
+
+    .btn-dark:hover {
+        background-color: #23272b;
+        border-color: #23272b;
+    }
+
+    .form-control-lg {
+        border-radius: 5px;
+    }
+
+    .lead {
+        color: #6c757d;
+    }
+
+    .text-danger {
+        font-size: 0.875rem;
+    }
+
+    .loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    .spinner {
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        border-radius: 50%;
+        border-top: 4px solid #ffffff;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+    }
+
+   
+</style>
