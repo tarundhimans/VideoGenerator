@@ -1,4 +1,4 @@
-namespace GeminiVideoMVC.Models
+namespace VideoGenerator.Models
 {
     public class ErrorViewModel
     {

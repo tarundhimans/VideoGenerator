@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\QSITA025\\source\\repos\\GeminiVideoMVC\\GeminiVideoMVC.csproj": {}
+    "C:\\Projects\\VideoGenerator\\GeminiVideoMVC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\QSITA025\\source\\repos\\GeminiVideoMVC\\GeminiVideoMVC.csproj": {
+    "C:\\Projects\\VideoGenerator\\GeminiVideoMVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\QSITA025\\source\\repos\\GeminiVideoMVC\\GeminiVideoMVC.csproj",
+        "projectUniqueName": "C:\\Projects\\VideoGenerator\\GeminiVideoMVC.csproj",
         "projectName": "GeminiVideoMVC",
-        "projectPath": "C:\\Users\\QSITA025\\source\\repos\\GeminiVideoMVC\\GeminiVideoMVC.csproj",
+        "projectPath": "C:\\Projects\\VideoGenerator\\GeminiVideoMVC.csproj",
         "packagesPath": "C:\\Users\\QSITA025\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\QSITA025\\source\\repos\\GeminiVideoMVC\\obj\\",
+        "outputPath": "C:\\Projects\\VideoGenerator\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

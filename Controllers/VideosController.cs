@@ -1,4 +1,4 @@
-﻿using GeminiVideoMVC.Models;
+﻿using VideoGenerator.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using PexelsDotNetSDK.Api;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace GeminiVideoMVC.Controllers
+namespace VideoGenerator.Controllers
 {
     public class VideosController : Controller
     {

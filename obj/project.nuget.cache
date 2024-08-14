@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pxy6BK/y5AU=",
+  "dgSpecHash": "2Onv//l97Cs=",
   "success": true,
-  "projectFilePath": "C:\\Users\\QSITA025\\source\\repos\\GeminiVideoMVC\\GeminiVideoMVC.csproj",
+  "projectFilePath": "C:\\Projects\\VideoGenerator\\VideoGenerator.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\QSITA025\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\QSITA025\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

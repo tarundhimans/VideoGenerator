@@ -12,11 +12,11 @@ using System;
 using System.Reflection;
 
 [assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
-[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-GeminiVideoMVC-d10dd50b-ef2b-4d59-8a94-605e135e9af4")]
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-VideoGenerator-d10dd50b-ef2b-4d59-8a94-605e135e9af4")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("GeminiVideoMVC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+34367b10a058e3174040f1bbdc85deccd644e82d")]
 [assembly: System.Reflection.AssemblyProductAttribute("GeminiVideoMVC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GeminiVideoMVC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

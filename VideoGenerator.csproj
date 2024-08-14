@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>aspnet-GeminiVideoMVC-d10dd50b-ef2b-4d59-8a94-605e135e9af4</UserSecretsId>
+    <UserSecretsId>aspnet-VideoGenerator-d10dd50b-ef2b-4d59-8a94-605e135e9af4</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

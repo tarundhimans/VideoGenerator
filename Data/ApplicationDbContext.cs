@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace GeminiVideoMVC.Data
+namespace VideoGenerator.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

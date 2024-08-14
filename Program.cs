@@ -1,4 +1,4 @@
-using GeminiVideoMVC.Data;
+using VideoGenerator.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
