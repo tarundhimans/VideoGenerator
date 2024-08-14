@@ -53,7 +53,6 @@
         document.getElementById('loader').style.display = 'none';
     }
 
-    // Show loader on form submit
     document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('form').forEach(form => {
             form.addEventListener('submit', function () {
@@ -62,7 +61,6 @@
         });
     });
 
-    // Hide the loader once the page is fully loaded
     window.onload = function () {
         hideLoader();
     };

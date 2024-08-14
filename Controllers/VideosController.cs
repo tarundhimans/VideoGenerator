@@ -51,10 +51,8 @@ namespace VideoGenerator.Controllers
 
                 var allQuotes = textContent.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
 
-                var filteredQuotes = allQuotes
-                    .Select(quote => RemoveAuthorAttribution(quote))
-                    .Where(quote => CountWords(quote) >= 3 && CountWords(quote) <= 4)
-                    .ToList();
+                var filteredQuotes = allQuotes.Select(quote => RemoveAuthorAttribution(quote))
+                    .Where(quote => CountWords(quote) >= 3 && CountWords(quote) <= 4).ToList();
 
                 return RedirectToAction("SearchQuotesResults", new { quotes = filteredQuotes });
             }
@@ -68,19 +66,6 @@ namespace VideoGenerator.Controllers
         public IActionResult SearchQuotesResults(List<string> quotes)
         {
             return View("SearchQuotesResults", quotes);
-        }
-
-        private string RemoveAuthorAttribution(string quote)
-        {
-            var delimiters = new[] { "-", "—", ",", "–" };
-            foreach (var delimiter in delimiters)
-            {
-                if (quote.Contains(delimiter))
-                {
-                    quote = quote.Split(delimiter)[0].Trim();
-                }
-            }
-            return quote;
         }
 
         [HttpPost]
@@ -101,11 +86,22 @@ namespace VideoGenerator.Controllers
                 {
                     Url = v.videoFiles.FirstOrDefault()?.link,
                     ThumbnailUrl = v.image,
-                    VideoDownloadUrl = v.videoFiles.FirstOrDefault()?.link
-                }).ToList();
+                    VideoDownloadUrl = v.videoFiles.FirstOrDefault()?.link}).ToList();
             }
 
             return View("SearchResults", videoModels);
+        }
+        private string RemoveAuthorAttribution(string quote)
+        {
+            var delimiters = new[] { "-", "—", ",", "–" };
+            foreach (var delimiter in delimiters)
+            {
+                if (quote.Contains(delimiter))
+                {
+                    quote = quote.Split(delimiter)[0].Trim();
+                }
+            }
+            return quote;
         }
 
         private async Task<string> GetQuotesFromGeminiApi(string prompt)
@@ -149,7 +145,7 @@ namespace VideoGenerator.Controllers
     }
 
 
-public class Part
+    public class Part
     {
         public string Text { get; set; }
     }
