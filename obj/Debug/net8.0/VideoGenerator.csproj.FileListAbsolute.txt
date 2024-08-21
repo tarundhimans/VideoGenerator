@@ -458,3 +458,4 @@ C:\Projects\VideoGenerator\obj\Debug\net8.0\refint\VideoGenerator.dll
 C:\Projects\VideoGenerator\obj\Debug\net8.0\VideoGenerator.pdb
 C:\Projects\VideoGenerator\obj\Debug\net8.0\VideoGenerator.genruntimeconfig.cache
 C:\Projects\VideoGenerator\obj\Debug\net8.0\ref\VideoGenerator.dll
+C:\Projects\VideoGenerator\bin\Debug\net8.0\CloudinaryDotNet.dll

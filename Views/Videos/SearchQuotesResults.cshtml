@@ -9,21 +9,21 @@
         <div class="col-md-8">
             <div class="text-center mb-4">
                 <h2 class="font-weight-bold text-dark">@ViewData["Title"]</h2>
-                <p class="text-secondary">Choose a quote below to search for related videos.</p>
+                <p class="text-secondary">Choose a quote below to overlay on the video.</p>
             </div>
             @if (Model != null && Model.Any())
             {
                 <div class="list-group">
                     @foreach (var quote in Model)
                     {
-                        <form asp-action="SearchVideos" method="post" class="mb-2">
+                        <form asp-action="DisplayVideo" method="post" class="mb-2">
                             <input type="hidden" name="selectedQuote" value="@quote" />
                             <div class="list-group-item list-group-item-light shadow-sm">
                                 <div class="text-dark">
                                     @quote
                                 </div>
                                 <div class="text-right mt-2">
-                                    <button type="submit" class="btn btn-sm btn-primary">Click to Watch Videos</button>
+                                    <button type="submit" class="btn btn-sm btn-primary">Generate Video</button>
                                 </div>
                             </div>
                         </form>

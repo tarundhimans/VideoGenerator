@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VideoGenerator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+34367b10a058e3174040f1bbdc85deccd644e82d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+062ec2b432d201e17b42f7668db61faed641102f")]
 [assembly: System.Reflection.AssemblyProductAttribute("VideoGenerator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VideoGenerator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

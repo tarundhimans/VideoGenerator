@@ -1,0 +1,20 @@
+﻿@model VideoGenerator.Models.VideoViewModel
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="text-center mb-4">
+                <h2 class="font-weight-bold text-dark">Generated Video</h2>
+            </div>
+            <div class="card shadow-sm border-light">
+                <video controls class="card-img-top">
+                    <source src="@Model.Url" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="card-body text-center">
+                    <a href="@Model.VideoDownloadUrl" class="btn btn-primary" download>Download Video</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

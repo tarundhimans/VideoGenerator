@@ -1,0 +1,68 @@
+﻿@model DisplayVideoViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video with Text Overlay</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #000;
+            padding: 10px;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .card-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .message {
+            font-size: 18px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="card-title">Video with Quote</h1>
+
+        @if (!string.IsNullOrEmpty(Model.VideoUrl))
+        {
+            <div class="video-card">
+                <video controls>
+                    <source src="@Model.VideoUrl" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        }
+        else
+        {
+            <p class="message">Video could not be processed.</p>
+        }
+    </div>
+</body>
+</html>

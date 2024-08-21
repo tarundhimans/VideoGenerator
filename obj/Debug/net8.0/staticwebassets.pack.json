@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Projects\\VideoGenerator\\wwwroot\\images\\22f30c1c06c893fe0ab014fb2d8dc14a.jpg",
+      "PackagePath": "staticwebassets\\images\\22f30c1c06c893fe0ab014fb2d8dc14a.jpg"
+    },
+    {
       "Id": "C:\\Projects\\VideoGenerator\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

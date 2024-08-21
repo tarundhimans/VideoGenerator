@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ltP4XV/ky9maLkAAYJX6HU8bF5nDGgCY1RxX+cuGvjw=",
+  "Hash": "ZTnFOiHTNu7jWnofUdJQAH4X9zbUpOJ/NV0KZgTGhBo=",
   "Source": "VideoGenerator",
   "BasePath": "_content/VideoGenerator",
   "Mode": "Default",
@@ -110,6 +110,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Projects\\VideoGenerator\\wwwroot\\images\\22f30c1c06c893fe0ab014fb2d8dc14a.jpg",
+      "SourceId": "VideoGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Projects\\VideoGenerator\\wwwroot\\",
+      "BasePath": "_content/VideoGenerator",
+      "RelativePath": "images/22f30c1c06c893fe0ab014fb2d8dc14a.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\22f30c1c06c893fe0ab014fb2d8dc14a.jpg"
     },
     {
       "Identity": "C:\\Projects\\VideoGenerator\\wwwroot\\js\\site.js",

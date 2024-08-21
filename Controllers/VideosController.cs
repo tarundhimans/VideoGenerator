@@ -1,5 +1,4 @@
-﻿using VideoGenerator.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using PexelsDotNetSDK.Api;
 using System.Collections.Generic;
@@ -8,6 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using VideoGenerator.Models;
 
 namespace VideoGenerator.Controllers
 {
@@ -16,12 +16,19 @@ namespace VideoGenerator.Controllers
         private readonly string pexelsApiKey;
         private readonly string geminiBaseUrl;
         private readonly string geminiApiKey;
+        private readonly CloudinaryService _cloudinaryService;
 
         public VideosController(IConfiguration configuration)
         {
             pexelsApiKey = configuration["PexelsApiKey"];
             geminiBaseUrl = configuration["GeminiApi:BaseUrl"];
             geminiApiKey = configuration["GeminiApi:ApiKey"];
+
+            _cloudinaryService = new CloudinaryService(
+                configuration["Cloudinary:CloudName"],
+                configuration["Cloudinary:ApiKey"],
+                configuration["Cloudinary:ApiSecret"]
+            );
         }
 
         public IActionResult Search()
@@ -39,7 +46,6 @@ namespace VideoGenerator.Controllers
             }
 
             var responseContent = await GetQuotesFromGeminiApi(prompt);
-
             var jsonResponse = JsonDocument.Parse(responseContent);
 
             if (jsonResponse.RootElement.TryGetProperty("candidates", out JsonElement candidatesElement) &&
@@ -48,7 +54,6 @@ namespace VideoGenerator.Controllers
                 partsElement[0].TryGetProperty("text", out JsonElement textElement))
             {
                 var textContent = textElement.GetString();
-
                 var allQuotes = textContent.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
 
                 var filteredQuotes = allQuotes.Select(quote => RemoveAuthorAttribution(quote))
@@ -69,39 +74,68 @@ namespace VideoGenerator.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SearchVideos(string selectedQuote)
+        public async Task<IActionResult> DisplayVideo(string selectedQuote)
         {
             if (string.IsNullOrEmpty(selectedQuote))
             {
-                return View(new List<VideoViewModel>());
+                return View("Error", new { message = "No quote selected." });
             }
 
-            var pexelsClient = new PexelsClient(pexelsApiKey);
-            var result = await pexelsClient.SearchVideosAsync(selectedQuote);
-            var videoModels = new List<VideoViewModel>();
-
-            if (result?.videos != null && result.videos.Any())
+            try
             {
-                videoModels = result.videos.Select(v => new VideoViewModel
-                {
-                    Url = v.videoFiles.FirstOrDefault()?.link,
-                    ThumbnailUrl = v.image,
-                    VideoDownloadUrl = v.videoFiles.FirstOrDefault()?.link}).ToList();
-            }
+               
+                var videoUrl = await GetVideoUrlFromPexels();
 
-            return View("SearchResults", videoModels);
+              
+                var processedVideoUrl = await _cloudinaryService.AddTextToVideoAsync(videoUrl, selectedQuote);
+
+                return View("DisplayVideo", new DisplayVideoViewModel
+                {
+                    VideoUrl = processedVideoUrl,
+                    DownloadLink = processedVideoUrl
+                });
+            }
+            catch (Exception ex)
+            {
+               
+                return View("Error", new { message = $"Failed to process video: {ex.Message}" });
+            }
         }
-        private string RemoveAuthorAttribution(string quote)
+
+        private async Task<string> GetVideoUrlFromPexels()
         {
-            var delimiters = new[] { "-", "—", ",", "–" };
-            foreach (var delimiter in delimiters)
+            using (var httpClient = new HttpClient())
             {
-                if (quote.Contains(delimiter))
+                var requestUri = "https://api.pexels.com/videos/popular";
+                httpClient.DefaultRequestHeaders.Add("Authorization", pexelsApiKey);
+
+                var response = await httpClient.GetStringAsync(requestUri);
+                var jsonResponse = JsonDocument.Parse(response);
+
+                if (jsonResponse.RootElement.TryGetProperty("videos", out JsonElement videosElement) &&
+                    videosElement.GetArrayLength() > 0)
                 {
-                    quote = quote.Split(delimiter)[0].Trim();
+                   
+                    var videoFiles = videosElement
+                        .EnumerateArray()
+                        .SelectMany(video => video.GetProperty("video_files").EnumerateArray())
+                        .ToList();
+
+                    if (videoFiles.Count > 0)
+                    {
+                        // Video Generate
+                        var random = new Random();
+                        var randomVideoFile = videoFiles[random.Next(videoFiles.Count)];
+
+                        if (randomVideoFile.TryGetProperty("link", out JsonElement linkElement))
+                        {
+                            return linkElement.GetString();
+                        }
+                    }
                 }
+
+                throw new Exception("No video found in Pexels API response.");
             }
-            return quote;
         }
 
         private async Task<string> GetQuotesFromGeminiApi(string prompt)
@@ -142,27 +176,18 @@ namespace VideoGenerator.Controllers
         {
             return quote.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Length;
         }
+
+        private string RemoveAuthorAttribution(string quote)
+        {
+            var delimiters = new[] { "-", "—", ",", "–" };
+            foreach (var delimiter in delimiters)
+            {
+                if (quote.Contains(delimiter))
+                {
+                    quote = quote.Split(delimiter)[0].Trim();
+                }
+            }
+            return quote;
+        }
     }
-
-
-    public class Part
-    {
-        public string Text { get; set; }
-    }
-
-    public class Content
-    {
-        public List<Part> Parts { get; set; }
-    }
-
-    public class Candidate
-    {
-        public Content Content { get; set; }
-    }
-
-    public class GeminiQuotesResponse
-    {
-        public List<Candidate> Candidates { get; set; }
-    }
-
 }

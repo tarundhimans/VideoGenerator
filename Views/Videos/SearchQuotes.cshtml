@@ -1,6 +1,7 @@
-﻿@{
+﻿@model List<string>
+
+@{
     ViewData["Title"] = "Select a Quote";
-    var quotes = Model as IEnumerable<string> ?? new List<string> { Model as string };
 }
 
 <div class="container mt-5">
@@ -8,24 +9,24 @@
         <div class="col-md-8">
             <div class="text-center mb-4">
                 <h2 class="font-weight-bold text-dark">@ViewData["Title"]</h2>
-                <p class="text-secondary">Choose a quote below to search for related videos.</p>
+                <p class="text-secondary">Choose a quote below to overlay on the video.</p>
             </div>
-            @if (quotes != null && quotes.Any())
+            @if (Model != null && Model.Any())
             {
-                <div class="row">
-                    @foreach (var quote in quotes)
+                <div class="list-group">
+                    @foreach (var quote in Model)
                     {
-                        <div class="col-md-4 mb-4">
-                            <div class="card shadow-sm border-light">
-                                <div class="card-body">
-                                    <h5 class="card-title text-dark">@quote</h5>
-                                    <form asp-action="SearchVideos" method="post">
-                                        <input type="hidden" name="selectedQuote" value="@quote" />
-                                        <button type="submit" class="btn btn-primary btn-block">Click to Watch Videos</button>
-                                    </form>
+                        <form asp-action="DisplayVideo" method="post" class="mb-2">
+                            <input type="hidden" name="selectedQuote" value="@quote" />
+                            <div class="list-group-item list-group-item-light shadow-sm">
+                                <div class="text-dark">
+                                    @quote
+                                </div>
+                                <div class="text-right mt-2">
+                                    <button type="submit" class="btn btn-sm btn-primary">Generate Video</button>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     }
                 </div>
             }
@@ -38,60 +39,3 @@
         </div>
     </div>
 </div>
-
-<div id="loader" class="loader" style="display: none;">
-    <div class="spinner"></div>
-</div>
-
-<script src="~/js/site.js"></script>
-<script>
-    function showLoader() {
-        document.getElementById('loader').style.display = 'flex';
-    }
-
-    function hideLoader() {
-        document.getElementById('loader').style.display = 'none';
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('form').forEach(form => {
-            form.addEventListener('submit', function () {
-                showLoader();
-            });
-        });
-    });
-
-    window.onload = function () {
-        hideLoader();
-    };
-</script>
-
-<style>
-    .card {
-        border-radius: 10px;
-        transition: box-shadow 0.3s ease, transform 0.2s ease;
-    }
-
-        .card:hover {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transform: translateY(-2px);
-        }
-
-    .card-body {
-        padding: 20px;
-    }
-
-    .btn-primary {
-        background-color: #007bff;
-        border-color: #007bff;
-    }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #004085;
-        }
-
-    .alert {
-        border-radius: 10px;
-    }
-</style>
